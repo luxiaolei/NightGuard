@@ -1,7 +1,7 @@
 # Night Guard Instruction
 
 
-Night guard package aims to protect trades opened during rollover period. The current version is able to close specified symbol with or without magic number after a certain time of a day, if its still open.
+Night guard package aims to protect trades opened during rollover period. The current version is able to close positions with specified symbol and magic numbers after a certain time of a day.
 
 ### Installation
 ---
