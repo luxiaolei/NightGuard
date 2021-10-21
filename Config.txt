@@ -1,0 +1,19 @@
+mt5_exe_path=C:\Program Files\Pepperstone MetaTrader 5\terminal64.exe
+
+server=
+
+login=
+
+password=
+
+TEST=1
+
+----Settings----
+
+NS_START_HOUR=22
+
+NS_START_MINUTE=58
+
+NS_END_HOUR=0
+
+NS_END_MINUTE=58
