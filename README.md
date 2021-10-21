@@ -51,11 +51,11 @@ For magic number specification, there are two ways to use it.
 
 2. Open PowerShell, and change working directory to NightGuard folder by 
     
-    cd path_to_NightGuard_directory
+        cd path_to_NightGuard_directory
 
 3. Run the command:
 
-    py .\nightguard\close_by_time.py
+        py .\nightguard\close_by_time.py
 
 It should print out your account infomation means its working now. If want to exit, simply press Control+C
 
