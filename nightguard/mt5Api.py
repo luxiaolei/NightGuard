@@ -311,7 +311,7 @@ class MT5Api:
                         q_out.put((task_dt, task))
                 else:
                     wait_sec = (task_dt - cur_dt).seconds - 1 # Extra 1s conpensate the excution time
-                    logging.info(f'{task} wait to be excuted. Wait seconds {wait_sec}')
+                    logging.debug(f'{task} wait to be excuted. Wait seconds {wait_sec}')
                     sleep(max(wait_sec, 0))
                     q_out.put((task_dt, task))
         t = Thread(target=_get_and_wait, args=(pq_in, q_out,))

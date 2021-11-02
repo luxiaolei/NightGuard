@@ -11,7 +11,7 @@ from configobj import ConfigObj
 from pathlib import Path
 
 
-report_fn = PAK_DIR / 'PositionReport.csv'
+
 symstop_fn = PAK_DIR / 'symbol_stopT.csv'
 
 class Tonight: 
@@ -125,7 +125,7 @@ class Tonight:
                     self.mt5.close_position(pos, comment=self.name)
                     logging.info('Closed!')
 
-    def close(self):
+    def close(self, report_fn_prefix=None):
         """
         Save reports of positions started from previous `night_end_dt` till `tonigh_end_dt`
         If TEST_MODE is on, also saves columns as if we close the positions.
@@ -142,6 +142,11 @@ class Tonight:
         
         logging.info('**** Tonight finished positions ****')
         print(pos_hist)
+
+        if report_fn_prefix is None:
+            report_fn = PAK_DIR / 'PositionReport.csv'
+        else:
+            report_fn = PAK_DIR / (report_fn_prefix + '_' + 'PositionReport.csv')
 
         if report_fn.exists():
             report_df = pd.read_csv(report_fn.as_posix(), index_col=0)
