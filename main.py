@@ -1,7 +1,7 @@
 import logging
 from nightguard import MT5Api, Tonight
 
-def run(config_path):
+def run(config_path, report_fn_prefix):
     mt5api = MT5Api(config_path)
     pq_in, q_out = mt5api.get_timmer_Qs()
 
@@ -20,14 +20,18 @@ def run(config_path):
             if task_name == Tonight.CLOSE_POSITION:
                 tonight.close_position(task['symbol'], task['magics'])
             elif task_name == Tonight.END:
-                tonight.close()
+                tonight.close(report_fn_prefix=report_fn_prefix)
                 break
             
-
 
         
 if __name__ == '__main__':
     config_path = input(f'\n>>> Please input the Config.ini path, press Enter for default location: ')
     if config_path == '':
         config_path = 'Config.ini'
-    run(config_path)
+
+    report_fn_prefix = input(f'\n>>> Please input the prefix for report name prefix_PositionReport.csv, press Enter for default: ')
+    if report_fn_prefix == '':
+        report_fn_prefix = None
+
+    run(config_path, report_fn_prefix)
