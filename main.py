@@ -1,12 +1,12 @@
 import logging
 from nightguard import MT5Api, Tonight
 
-def run():
-    mt5api = MT5Api()
+def run(config_path):
+    mt5api = MT5Api(config_path)
     pq_in, q_out = mt5api.get_timmer_Qs()
 
     while True:
-        tonight = Tonight(mt5api)
+        tonight = Tonight(mt5api, config_path)
         tonight.arrange_tonight_tasks(pq_in)
         pq_in.put((
             tonight.tonight_end_dt, {'task': Tonight.END}
@@ -27,4 +27,7 @@ def run():
 
         
 if __name__ == '__main__':
-    run()
+    config_path = input(f'\n>>> Please input the Config.ini path, press Enter for default location: ')
+    if config_path == '':
+        config_path = 'Config.ini'
+    run(config_path)

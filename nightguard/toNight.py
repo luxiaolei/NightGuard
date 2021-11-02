@@ -8,8 +8,8 @@ from . import logging, PAK_DIR
 from .mt5Api import MT5Api
 
 from configobj import ConfigObj
+from pathlib import Path
 
-nightConf = ConfigObj((PAK_DIR/'Config.ini').as_posix())['NightSetting']
 
 report_fn = PAK_DIR / 'PositionReport.csv'
 symstop_fn = PAK_DIR / 'symbol_stopT.csv'
@@ -24,9 +24,11 @@ class Tonight:
 
     MAGIC_ALL = -3418239482
 
-    def __init__(self, mt5api):
+    def __init__(self, mt5api, config_path=PAK_DIR/'Config.ini'):
         self.mt5 = mt5api
-        
+        if isinstance(config_path, str): config_path = Path(config_path)
+        nightConf = ConfigObj(config_path.as_posix())['NightSetting']
+
         # Calculate `tonight_date` which is the date AFTER Rollover time.
         cur_time = self.mt5.broker_time_local
         if cur_time.time() < time(nightConf.as_int('NS_END_HOUR'), nightConf.as_int('NS_END_MINUTE')):

@@ -61,6 +61,7 @@ class MT5Api:
         Args:
             config_path (str, optional): path to Config.ini file. Defaults to PAK_DIR/'Config.ini'.
         """
+        if isinstance(config_path, str): config_path = Path(config_path)
         self.conf = ConfigObj(config_path.as_posix())['Auth']
         self.login()
         
